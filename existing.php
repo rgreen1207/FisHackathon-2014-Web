@@ -35,7 +35,7 @@
               	<p>All fields are required below.</p>
                 
                 <table>
-                <form role="form">
+                <form method="post" action="mailto:rgreen@csumb.edu?subject=VesselRegestration" enctype="text/plain">
                   <tr><div class="form-group">
                     <td><label for="name">Owner's Name:</label></td>
                     <td><input name="name" type="text" class="form-control" id="name" placeholder="Enter your name"></td>
@@ -69,7 +69,7 @@
                   	<td><input type="file" id="file" name="file" multiple="multiple" /></td>
 				  </div></tr>
                   <div class="checkbox">
-                  </div>
+                  </div> 
                   <tr><td><button type="submit" class="btn btn-default">Submit</button></td></tr>
                 </form>
 				</table>
