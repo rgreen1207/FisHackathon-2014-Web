@@ -1,7 +1,11 @@
-<?php 
+<?php
+
+	require_once 'dbConn.php';
+ 
 	if (isset($_POST['formData'])){
 		echo '<script>alert("Success");</script>';
 	}
+	
 ?>
 
 <!DOCTYPE html>
