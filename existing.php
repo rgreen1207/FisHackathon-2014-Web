@@ -80,8 +80,8 @@
 				<tr></tr>
 				<tr>
 					<td align="center" colspan="2">
-						<input type="submit" value="Submit" />
-						<input type="button" value="Cancel" />
+						<input type="submit" id="submit" value="Submit" />
+						<input type="button" id="cancel" onclick="location.href='index.php';" value="Cancel" />
 					</td>
 				</tr>
 			</table>
