@@ -10,7 +10,11 @@
 				color: white;
 			}
 			#container{
-			
+				position: relative;
+				display: block;
+				float: middle;
+				left: 50%;
+				right: 50%;
 			}
 			input[type="text"]{
 				width:200px
