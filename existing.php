@@ -75,7 +75,7 @@
 				</tr>
 				<tr>
 					<td><label for="intention">Intention: </label></td>
-					<td><input type="textarea" id="intention" class="formData" required /></td>
+					<td><input type="text" id="intention" class="formData" required /></td>
 				</tr>
 				<tr></tr>
 				<tr>

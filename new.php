@@ -1,46 +1,90 @@
+<?php
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-
-		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
-		Remove this if you use the .htaccess -->
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-		<title>new</title>
-		<meta name="description" content="">
-		<meta name="author" content="Ryan">
-
-		<meta name="viewport" content="width=device-width; initial-scale=1.0">
-
-		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-		<link rel="shortcut icon" href="/favicon.ico">
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Register a new vessel</title>
+		<style>
+			.formData{
+				width: 200px;
+			}
+			.formSelect, .form2{
+				width: 100px;
+			}
+			body{
+				background: #ffffff; 
+			}
+			label{
+				display: block;
+				text-align: right;
+			}
+		</style>
 	</head>
-
 	<body>
-		<div>
-			<header>
-				<h1>new</h1>
-			</header>
-			<nav>
-				<p>
-					<a href="/index">Home</a>
-				</p>
-				<p>
-					<a href="/contact">Contact</a>
-				</p>
-			</nav>
-
-			<div>
-
-			</div>
-
-			<footer>
-				<p>
-					&copy; Copyright  by Ryan
-				</p>
-			</footer>
-		</div>
+		<h2>Register an Existing Vessel</h2>
+		
+		<p style="color: red">All fields are required below.</p>
+		<form name="formData" id="formData" method="post" action="existing.php">
+			<table>
+				<tr>
+					<td><label for="ownerName">Owner Name: </label></td>
+					<td><input type="text" id="ownerName" class="formData" required /></td>
+				</tr>
+				<tr>
+					<td><label for="email">Email: </label></td>
+					<td><input type="email" id="email" class="formData" required /></td>
+				</tr>
+				<tr>
+					<td><label for="phone">Phone: </label></td>
+					<td><input type="tel" id="phone" class="formData" required /></td>
+				</tr>
+				<tr>
+					<td><label for="address">Address: </label></td>
+					<td><input type="text" id="address" class="formData" required /></td>
+				</tr>
+				<tr>
+					<td><label for="municipality">Municipality: </label></td>
+					<td>
+						<select id="municipality" class="formSelect" required>
+							<option value="none" selected>Select</option>
+							<option value="Cantilan">Cantilan</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><label for="gear">Gear: </label></td>
+					<td><input type="text" id="gear" class="formData" required /></td>
+				</tr>
+				<tr>
+					<td><label for="vesselType">Vessel Type: </label></td>
+					<td>
+						<select id="vesselType" class="formSelect" required>
+							<option value="none" selected>Select</option>
+							<option value="M">M</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><label for="length">Length(m): </label></td>
+					<td><input type="number" id="length" 
+						step="0.1" min="1" max="500" value="1" class="form2" required /></td>
+				</tr>
+				<tr>
+					<td><label for="intention">Intention: </label></td>
+					<td><input type="text" id="intention" class="formData" required /></td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<td align="center" colspan="2">
+						<input type="submit" id="submit" value="Submit" />
+						<input type="button" id="cancel" onclick="location.href='index.php';" value="Cancel" />
+					</td>
+				</tr>
+			</table>
+		</form>
 	</body>
 </html>
