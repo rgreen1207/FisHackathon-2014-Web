@@ -10,6 +10,13 @@
 			body{
 				background: #ffffff;
 			}
+			#container{
+				margin-left: -360px;
+				padding: 0;
+				position: relative;
+				display: block;
+				left: 50%;
+			}
 		</style>
 	</head>
 	<body>
