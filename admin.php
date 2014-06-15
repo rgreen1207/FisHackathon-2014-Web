@@ -59,11 +59,11 @@ $("document").ready(function(){
 
 		echo "<table align='center' border='1'><tr><td>Request Number</td><td>Owner's Name</td><td>Email</td><td>Phone</td><td>Address</td><td>Municipality</td><td>Gear</td><td>Vessel Type</td><td>Length</td><td>Intention</td><td>Approve/Deny</td></tr>";
 		foreach($vessels as $vessel) {
-			if($vessel['Approved/Denied'] == 0)
+			if($vessel['Approved_Denied'] == 0)
 			{
 				$color="red";
 			}
-			else if($vessel['Approved/Denied'] == 1)
+			else if($vessel['Approved_Denied'] == 1)
 			{
 				$color="green";
 			}
@@ -71,11 +71,13 @@ $("document").ready(function(){
 			{
 				$color="";		
 			}
-				echo "<tr bgcolor='".$color."'><td align='center'>" . $vessel['Request'] . "</td><td>" . $vessel['OwnerName'] ."</td><td>" . $vessel['Email'] . "</td><td>" . $vessel['Phone'] . "</td><td>" . $vessel['Address'] . "</td><td>" . $vessel['Municipality'] . "</td><td>" . $vessel['Gear'] . "</td><td>" . $vessel['VT'] . "</td><td>" . $vessel['Length'] . "</td><td>" . $vessel['Intention'] . "</td><td><form method='POST' action='admin.php'><input type='submit' value='Approve' name='Back' align='center'/></form><form method='POST' action='admin.php'><input type='submit' value='Deny' name='Back' align='center'/></form></td></td></tr>";
+				echo "<tr bgcolor='".$color."'><td align='center'>" . $vessel['Request'] . "</td><td>" . $vessel['OwnerName'] ."</td><td>" . $vessel['Email'] . "</td><td>" . $vessel['Phone'] . "</td><td>";
+				echo $vessel['Address'] . "</td><td>" . $vessel['Municipality'] . "</td><td>" . $vessel['Gear'] . "</td><td>" . $vessel['VT'] . "</td><td>" . $vessel['Length'] . "</td><td>" . $vessel['Intention'] . "</td><td>";
+				echo "<form method='POST' action='color.php'><input type='submit' value='Approve' name='approve' id='approve' align='center'/>";
+				echo "<input type='submit' value='Deny' name='deny' id='deny' align='center'/></form>";
+				echo "</td></td></tr>";				
 		}
 		echo "</table>";
-
-	
 ?>
 
   </div>
@@ -91,17 +93,17 @@ $("document").ready(function(){
 
 		echo "<table align='center' border='1'><tr><td>Request Number</td><td>Owner's Name</td><td>Email</td><td>Phone</td><td>Address</td><td>Municipality</td><td>Gear</td><td>Vessel Type</td><td>Length</td><td>Intention</td><td>Approve/Deny</td></tr>";
 		foreach($vessels as $vessel) {
-			if($vessel['Approved/Denied'] == 0)
+			if($vessel['Approved_Denied'] == 0)
 			{
 				$color="red";
 			}
-			else if($vessel['Approved/Denied'] == 1)
+			else if($vessel['Approved_Denied'] == 1)
 			{
 				$color="green";
 			}
 			else
 			{
-				$color="";		
+				$color="";
 			}
 				echo "<tr bgcolor='".$color."'><td align='center'>" . $vessel['RequestExistingNum'] . "</td><td>" . $vessel['OwnerName'] ."</td><td>" . $vessel['Email'] . "</td><td>" . $vessel['Phone'] . "</td><td>" . $vessel['Address'] . "</td><td>" . $vessel['Municipality'] . "</td><td>" . $vessel['Gear'] . "</td><td>" . $vessel['VT'] . "</td><td>" . $vessel['Length'] . "</td><td>" . $vessel['Intention'] . "</td><td><form method='POST' action='admin.php'><input type='submit' value='Approve' name='Back' align='center'/></form><form method='POST' action='admin.php'><input type='submit' value='Deny' name='Back' align='center'/></form></td></td></tr>";
 		}
