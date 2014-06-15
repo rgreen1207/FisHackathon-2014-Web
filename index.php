@@ -17,6 +17,12 @@
 				display: block;
 				left: 50%;
 			}
+			#left{
+				float: left;
+			}
+			#right{
+				float: right;
+			}
 		</style>
 	</head>
 	<body>
