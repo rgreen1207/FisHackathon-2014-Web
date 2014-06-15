@@ -8,8 +8,7 @@
 				width:200px;
 			}
 			body{
-				background: #606060;
-				color: white;
+				background: #ffffff;
 			}
 		</style>
 	</head>
