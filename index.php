@@ -2,38 +2,39 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Vessel Registration</title>
+		<title>MBWAS</title>
 		<style>
-			input[type="text"]{
-				width:200px;
-			}
 			body{
-				background: #ffffff;
+				margin: 0 auto;
+				width:980px;
+			}
+			h1, h2, h3, h4{
+				text-align: center;
+			}
+			input{
+				align: center;
+				padding: 10px;
 			}
 			#container{
-				margin-left: -360px;
-				padding: 0;
+				margin-left: -400px;
+				margin-top: 245px;
+				width: 800px;
 				position: relative;
 				display: block;
+				float: middle;
 				left: 50%;
-			}
-			#left{
-				float: left;
-			}
-			#right{
-				float: right;
+				font-size: 18px;
+				font-weight: bold;
 			}
 		</style>
 	</head>
 	<body>
 		<div id="container">
-			<div id="left">
-				<input type="submit" />
-				<input type="submit" />
-			</div>
-			<div id="right">
-				<img alt="blah" src="images/kelp.png">
-			</div>
+			<img id="kelp" alt="" src="images/kelp.png">
+			<h1>MBWAS</h1>
+			<h4>Monterey Bay West African Solution</h4>
+			<input type="submit" id="fishermenBtn" value="Fishermen" />
+			<input type="submit" id="staffBtn" value="Technical Staff" />
 		</div>
 	</body>
 </html>
