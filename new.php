@@ -25,7 +25,7 @@
 		</style>
 	</head>
 	<body>
-		<h2>Register an Existing Vessel</h2>
+		<h2>Register a new vessel</h2>
 		
 		<p style="color: red">All fields are required below.</p>
 		<form name="formData" id="formData" method="post" action="existing.php">
