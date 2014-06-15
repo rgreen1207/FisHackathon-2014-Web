@@ -41,7 +41,7 @@
 						<a href="existing.php" onclick=existing.php><img src="images/rereg.jpg" width="500px" height="500px"></a> 
 					</td>
 					<td>
-						<a href="new.php" onclick=existing.php><img src="images/new.jpg" width="500px" height="500px"></a>
+						<a href="new.php" onclick=new.php><img src="images/new.jpg" width="500px" height="500px"></a>
 					</td>					
 				</tr></table>
 			</nav>
