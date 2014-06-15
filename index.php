@@ -1,3 +1,13 @@
+<?php 
+	session_start();
+	include_once 'dbConn.php';
+	
+	if (isset($_POST['logOut'])) {
+		session_destroy();
+		header("Location: index.php");
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -72,6 +82,18 @@
 				text-align: center;
 				width: 600px;
 			}
+			#NewR{
+				display: block;
+				float: middle;
+				background-color: #ffffff;
+				top: 65%;
+				margin-top: -200px;
+				min-height: 400px;
+				padding-bottom: 20px;
+				padding-top: 20px;
+				position: relative;
+				text-align: center;
+			}
 		</style>
 		<script>
 			function showDiv() {
@@ -79,8 +101,25 @@
 				var footerDefault = document.getElementById("footerDefault");
 				if (footerFishermen.style.display == "none"){
 					footerDefault.style.display = "none";
+					footerStaffLogin.style.display = "none";
 					footerFishermen.style.display = "block";
 				}
+			}
+			function showLoginDiv(){
+				var footerStaffLogin = document.getElementById("footerStaffLogin");
+				var footerDefault = document.getElementById("footerDefault");
+				if (footerStaffLogin.style.display == "none"){
+					footerDefault.style.display = "none";
+					footerFishermen.style.display = "none";
+					footerStaffLogin.style.display = "block";
+				}
+			}
+			function hideFooterDiv(){
+				var footerDiv = document.getElementById("containerFooter");
+				footerDiv.style.display = "none";
+			}
+			function getAttr(object){
+				return object.getAttribute("value");
 			}
 		</script>
 	</head>
@@ -91,7 +130,8 @@
 			<input type="submit" id="fishermenBtn" value="Fishermen" class="btn" 
 				onclick="showDiv();" />
 			<img id="kelp" alt="" src="Images/kelp.png" style="vertical-align: middle">
-			<input type="submit" id="staffBtn" value="Technical Staff" class="btn" />
+			<input type="submit" id="staffBtn" value="Technical Staff" class="btn" 
+				onclick="showLoginDiv();" />
 		</div>
 		<div id="containerFooter">
 			<div id="footerDefault">
@@ -102,7 +142,7 @@
 				<h2>Register an Existing Vessel</h2>
 		
 				<p style="color: red">All fields are required below.</p>
-				<form name="formData" id="formData" method="post" action="add.php">
+				<form name="formData" id="formData" method="post" action="index.php">
 					<table>
 						<tr>
 							<td><label for="ownerName">Owner Name: </label></td>
@@ -162,6 +202,153 @@
 					</table>
 				</form>
 			</div>
+			<div id="footerStaffLogin" style="display: none">
+				<form name="form1" method="post" action="index.php">
+					<table width="300" border="10" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
+						<tr>
+						<td>
+						<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
+						<tr>
+						<td colspan="3"><strong>Admin Login</strong></td>
+						</tr>
+						<tr>
+						<td width="78">Username</td>
+						<td width="6">:</td>
+						<td width="294"><input name="username" type="text" name="username" value=""></td>
+						</tr>
+						<tr>
+						<td>Password</td>
+						<td>:</td>
+						<td><input name="password" type="password" name="password"></td>
+						</tr>
+						<tr>
+						<td><input type="submit" name="Login" value="Login"></td>
+						</tr>
+						</table>
+						</td>
+						
+						</tr>
+					</table>
+				</form>
+			</div>
 		</div>
 	</body>
 </html>
+
+<?php 
+	//ADMIN LOGIN
+	if (isset($_POST['Login'])) {  //login form has been submitted
+		$sql = "SELECT * FROM CampAdmins WHERE Username=:username AND Password=:password";
+		$stmt = $dbConn->prepare($sql);
+		$stmt->execute(array(
+			":username"	=>	$_POST['username'],
+			":password"	=>	sha1($_POST['password'])
+		));
+		$result = $stmt->fetchAll();
+		if(empty($result)){
+			header("Location: index.php?error=Wrong Info");
+		}
+		else{
+			$_SESSION['username'] = $result["Username"];
+			$_SESSION['password'] = $result["Password"];
+			
+			echo "<script>hideFooterDiv();</script>
+				<div id='NewR' align='center'>
+					<form method='POST' action='index.php'>
+						<input type='submit' value='Log Out' id='logOut' name='logOut' class='btn' />
+					</form>";
+			
+			$sql = "SELECT * FROM ExistingRegistration ORDER BY RequestExistingNum ASC";
+			$stmt = $dbConn->prepare($sql);
+			$stmt->execute();
+			$vessels = $stmt->fetchAll();
+
+			echo "
+				<table align='center' border='1'>
+					<tr>
+						<td>Request Number</td>
+						<td>Owner's Name</td>
+						<td>Email</td>
+						<td>Phone</td>
+						<td>Address</td>
+						<td>Municipality</td>
+						<td>Gear</td>
+						<td>Vessel Type</td>
+						<td>Length</td>
+						<td>Intention</td>
+						<td>Approve/Deny</td>
+					</tr>";
+			foreach($vessels as $vessel) {
+				if($vessel['Approved_Denied'] == 0)
+				{
+					$color="red";
+				}
+				else if($vessel['Approved_Denied'] == 1)
+				{
+					$color="green";
+				}
+				else
+				{
+					$color="black";
+				}
+				echo "
+					<tr bgcolor='".$color."'>
+						<td align='center'>" . $vessel['RequestExistingNum'] . "</td>
+						<td>" . $vessel['OwnerName'] . "</td>
+						<td>" . $vessel['Email'] . "</td>
+						<td>" . $vessel['Phone'] . "</td>
+						<td>" . $vessel['Address'] . "</td>
+						<td>" . $vessel['Municipality'] . "</td>
+						<td>" . $vessel['Gear'] . "</td>
+						<td>" . $vessel['VT'] . "</td>
+						<td>" . $vessel['Length'] . "</td>
+						<td>" . $vessel['Intention'] . "</td>
+						<td>" . "
+							<form method='POST' action='index.php'>
+								<input type='submit' value='Approve' id='approve' align='center' />
+								<input type='submit' value='Deny' id='deny' align='center' />
+								<input type='hidden' id='reference' name='reference' value=" . $vessel['RequestExistingNum'] . " />
+							</form>
+						</td>
+					</tr>";
+			}
+			echo "</table></div>";
+		}
+	}
+	if (isset($_POST['insertForm'])){
+		$sql = "INSERT INTO ExistingRegistration (OwnerName, Email, Phone, Address, Municipality, Gear, VT, Length, Intention)
+				VALUES(:name, :email, :phone, :address, :mun, :gear, :type, :length, :intention)";
+		$stmt = $dbConn->prepare($sql);
+		$stmt->execute(array (
+			":name"	=>	$_POST['name'],
+			":email"	=>	$_POST['email'],
+			":phone"	=>	$_POST['phone'],
+			":address"	=>	$_POST['address'],
+			":mun"	=>	$_POST['mun'],
+			":gear"	=>	$_POST['gear'],
+			":type"	=>	$_POST['type'],
+			":length"	=>	$_POST['length'],
+			":intention"	=>	$_POST['intention']
+		));
+		header("Location: index.php");
+	}
+	if(isset($_POST['approve']))
+	{
+		header("Location: http://www.google.com");
+		$sql = "UPDATE ExistingRegistration SET Approved_Denied=:approval WHERE RequestExistingNum=:value";
+		$stmt = $dbConn->prepare($sql);
+		$stmt->execute(array (
+			":approval" => '1',
+			":value" => '1234567891'
+		));
+	}
+	if(isset($_POST['deny']))
+	{
+		$sql = "UPDATE ExistingRegistration SET Approved_Denied=:denial WHERE RequestExistingNum=:value";
+		$stmt = $dbConn->prepare($sql);
+		$stmt->execute(array (
+			":denial"	=>	'0',
+			":value"	=>	getAttr($_POST['reference'])
+		));
+	}
+?>
