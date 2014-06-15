@@ -90,7 +90,7 @@
 			<h3>Monterey Bay West African Solution</h3>
 			<input type="submit" id="fishermenBtn" value="Fishermen" class="btn" 
 				onclick="showDiv();" />
-			<img id="kelp" alt="" src="images/kelp.png" style="vertical-align: middle">
+			<img id="kelp" alt="" src="Images/kelp.png" style="vertical-align: middle">
 			<input type="submit" id="staffBtn" value="Technical Staff" class="btn" />
 		</div>
 		<div id="containerFooter">
