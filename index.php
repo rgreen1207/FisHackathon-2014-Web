@@ -118,9 +118,6 @@
 				var footerDiv = document.getElementById("containerFooter");
 				footerDiv.style.display = "none";
 			}
-			function getAttr(object){
-				return object.getAttribute("value");
-			}
 		</script>
 	</head>
 	<body>
@@ -244,7 +241,7 @@
 			":username"	=>	$_POST['username'],
 			":password"	=>	sha1($_POST['password'])
 		));
-		$result = $stmt->fetchAll();
+		$result = $stmt->fetch();
 		if(empty($result)){
 			header("Location: index.php?error=Wrong Info");
 		}
@@ -289,7 +286,7 @@
 				}
 				else
 				{
-					$color="black";
+					$color="";
 				}
 				echo "
 					<tr bgcolor='".$color."'>
@@ -339,7 +336,7 @@
 		$stmt = $dbConn->prepare($sql);
 		$stmt->execute(array (
 			":approval" => '1',
-			":value" => '1234567891'
+			":value" => $_POST['reference']
 		));
 	}
 	if(isset($_POST['deny']))
@@ -348,7 +345,7 @@
 		$stmt = $dbConn->prepare($sql);
 		$stmt->execute(array (
 			":denial"	=>	'0',
-			":value"	=>	getAttr($_POST['reference'])
+			":value"	=>	$_POST['reference']
 		));
 	}
 ?>
